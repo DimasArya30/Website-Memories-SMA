@@ -4,14 +4,23 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    // Hanya tampil sekali per sesi browser
+    // Tidak akan muncul lagi saat navigasi internal
+    const hasLoaded = sessionStorage.getItem('pofsait-loaded');
+    if (hasLoaded) return;
+
+    setIsLoading(true);
+
     const timer = setTimeout(() => {
       setFadeOut(true);
+      sessionStorage.setItem('pofsait-loaded', 'true');
       setTimeout(() => setIsLoading(false), 600);
     }, 2400);
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -27,14 +36,14 @@ export default function LoadingScreen() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
-      {/* Logo — diperbesar */}
       <div className="logo-reveal relative z-10">
         <Image
-          src="/images/logo.png"
+          src={`/images/logo.png?v=${Date.now()}`}
           alt="THE POFSAIT"
           width={180}
           height={180}
           priority
+          unoptimized
           className="drop-shadow-2xl"
         />
       </div>

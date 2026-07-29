@@ -4,22 +4,21 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 
+// Tidak ada fullPage — semua navigasi pure scroll dalam satu halaman
 const navLinks = [
-  { href: '#home', label: 'Home', page: '/' },
-  { href: '#tentang', label: 'Tentang', page: '/' },
-  { href: '#media', label: 'Media', page: '/' },
-  { href: '#walikelas', label: 'Wali Kelas', page: '/' },
-  { href: '#anggota', label: 'Anggota', page: '/', fullPage: '/anggota' },
-  { href: '#gallery', label: 'Gallery', page: '/' },
-  { href: '#prestasi', label: 'Prestasi', page: '/' },
+  { href: '#home', label: 'Home' },
+  { href: '#tentang', label: 'Tentang' },
+  { href: '#media', label: 'Media' },
+  { href: '#walikelas', label: 'Wali Kelas' },
+  { href: '#anggota', label: 'Anggota' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#prestasi', label: 'Prestasi' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -32,31 +31,13 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const handleClick = (link: typeof navLinks[0]) => {
+  // Semua navigasi menggunakan scrollIntoView — tidak pernah reload halaman
+  const handleClick = (href: string) => {
     setMobileOpen(false);
-
-    // Jika ada halaman penuh (seperti /anggota) dan kita sedang di halaman itu
-    if (link.fullPage && pathname === link.fullPage) {
-      // Sudah di halaman tujuan, scroll ke atas
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Jika link punya halaman penuh dan kita bukan di halaman itu
-    if (link.fullPage && pathname !== link.fullPage) {
-      // Navigasi ke halaman penuh
-      window.location.href = link.fullPage;
-      return;
-    }
-
-    // Untuk link anchor di halaman utama
-    if (pathname !== '/') {
-      window.location.href = '/' + link.href;
-      return;
-    }
-
-    const el = document.querySelector(link.href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -72,28 +53,20 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto section-padding flex items-center justify-between">
-          {/* Logo — diperbesar ~18% */}
-          <a
-            href={pathname === '/' ? '#home' : '/'}
-            onClick={(e) => {
-              e.preventDefault();
-              if (pathname !== '/') {
-                window.location.href = '/';
-              } else {
-                document.querySelector('#home')?.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className="relative z-10 flex items-center gap-3 group"
+          <button
+            onClick={() => handleClick('#home')}
+            className="relative z-10 flex items-center gap-3 group bg-transparent border-0 cursor-pointer p-0"
           >
             <Image
-              src="/images/logo.png"
+              src={`/images/logo.png?v=${Date.now()}`}
               alt="POFSAIT"
               width={52}
               height={52}
               className="transition-transform duration-300 group-hover:scale-110"
               priority
+              unoptimized
             />
-            <div className="hidden sm:block">
+            <div className="hidden sm:block text-left">
               <span className="text-gradient font-display font-bold text-lg leading-tight block">
                 THE POFSAIT
               </span>
@@ -101,14 +74,13 @@ export default function Navbar() {
                 MIPA 2 SMANEKA
               </span>
             </div>
-          </a>
+          </button>
 
-          {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <button
                 key={link.href}
-                onClick={() => handleClick(link)}
+                onClick={() => handleClick(link.href)}
                 className="relative px-4 py-2 text-sm text-white/60 hover:text-white transition-colors duration-300 group bg-transparent border-0 cursor-pointer"
               >
                 {link.label}
@@ -117,7 +89,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden relative z-10 p-2 text-white/80 hover:text-white transition-colors bg-transparent border-0 cursor-pointer"
@@ -127,11 +98,9 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Separator — selalu terlihat */}
         <div className="navbar-separator" />
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -145,7 +114,7 @@ export default function Navbar() {
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
-                  onClick={() => handleClick(link)}
+                  onClick={() => handleClick(link.href)}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}

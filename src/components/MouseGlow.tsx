@@ -1,40 +1,55 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MouseGlow() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
+  const [pos, setPos] = useState({ x: -500, y: -500 });
+  const rafRef = useRef<number>(0);
+  const posRef = useRef({ x: -500, y: -500 });
+  const visibleRef = useRef(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      posRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+      };
+      if (!visibleRef.current) visibleRef.current = true;
+      // Throttle dengan rAF — max 60fps
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          setPos({ ...posRef.current });
+          rafRef.current = 0;
+        });
+      }
     };
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    document.body.addEventListener('mouseleave', handleMouseLeave);
-    document.body.addEventListener('mouseenter', handleMouseEnter);
+    const handleLeave = () => {
+      visibleRef.current = false;
+      setPos({ x: -500, y: -500 });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.body.addEventListener('mouseleave', handleLeave);
+    document.body.addEventListener('mouseenter', () => { visibleRef.current = true; });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      document.body.removeEventListener('mouseleave', handleMouseLeave);
-      document.body.removeEventListener('mouseenter', handleMouseEnter);
+      document.body.removeEventListener('mouseleave', handleLeave);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [isVisible]);
+  }, []);
 
-  if (!isVisible) return null;
+  if (!visibleRef.current && pos.x === -500) return null;
 
   return (
     <div
-      className="fixed pointer-events-none z-[90] w-[400px] h-[400px] rounded-full transition-opacity duration-300"
+      className="fixed pointer-events-none z-[90] w-[350px] h-[350px] rounded-full"
       style={{
-        background: 'radial-gradient(circle, rgba(108,59,255,0.08) 0%, transparent 70%)',
-        left: mousePos.x - 200,
-        top: mousePos.y - 200,
-        opacity: isVisible ? 1 : 0,
+        background: 'radial-gradient(circle, rgba(108,59,255,0.06) 0%, transparent 70%)',
+        left: pos.x - 175,
+        top: pos.y - 175,
+        willChange: 'left, top',
       }}
     />
   );

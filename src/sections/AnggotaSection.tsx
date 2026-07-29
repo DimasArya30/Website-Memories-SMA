@@ -1,10 +1,9 @@
 'use client';
 
 import { useRef, useState, useCallback } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import anggotaData from '@/data/anggota.json';
 
 const PREVIEW_COUNT = 8;
@@ -33,11 +32,12 @@ function MemberCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      layout
+      initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.5,
-        delay: Math.min(index * 0.07, 0.5),
+        duration: 0.4,
+        delay: Math.min(index * 0.04, 0.4),
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -78,8 +78,9 @@ function MemberCard({
 export default function AnggotaSection() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const [expanded, setExpanded] = useState(false);
 
-  const previewMembers = anggotaData.slice(0, PREVIEW_COUNT);
+  const displayedMembers = expanded ? anggotaData : anggotaData.slice(0, PREVIEW_COUNT);
 
   return (
     <section ref={ref} id="anggota" className="relative py-28 sm:py-36 overflow-hidden">
@@ -108,27 +109,41 @@ export default function AnggotaSection() {
           </p>
         </motion.div>
 
-        {/* Preview Grid — hanya 8 anggota */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
-          {previewMembers.map((anggota, i) => (
-            <MemberCard key={anggota.id} anggota={anggota} index={i} isInView={isInView} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {displayedMembers.map((anggota, i) => (
+              <MemberCard
+                key={anggota.id}
+                anggota={anggota}
+                index={i}
+                isInView={isInView}
+              />
+            ))}
+          </AnimatePresence>
         </div>
 
-        {/* Tombol Lihat Semua */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex justify-center mt-12"
         >
-          <Link
-            href="/anggota"
-            className="group inline-flex items-center gap-3 px-8 py-3.5 bg-gradient-animated text-white font-medium rounded-full text-sm tracking-wide hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 font-sans"
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="group inline-flex items-center gap-3 px-8 py-3.5 bg-gradient-animated text-white font-medium rounded-full text-sm tracking-wide hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 font-sans cursor-pointer border-0"
           >
-            Lihat Semua Anggota
-            <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+            {expanded ? (
+              <>
+                Tampilkan Lebih Sedikit
+                <ChevronUp size={18} className="transition-transform duration-300" />
+              </>
+            ) : (
+              <>
+                Lihat Semua Anggota
+                <ChevronDown size={18} className="transition-transform duration-300" />
+              </>
+            )}
+          </button>
         </motion.div>
       </div>
     </section>

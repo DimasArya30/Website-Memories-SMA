@@ -21,16 +21,16 @@ export default function FloatingParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Dikurangi dari 50 menjadi 30 untuk performa
-    const count = Math.min(30, Math.floor(window.innerWidth / 50));
+    // Dikurangi jadi 15, dan TANPA garis koneksi (yang bikin berat)
+    const count = Math.min(15, Math.floor(window.innerWidth / 80));
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 1.5 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.2,
-        speedY: (Math.random() - 0.5) * 0.2,
-        opacity: Math.random() * 0.3 + 0.05,
+        speedX: (Math.random() - 0.5) * 0.15,
+        speedY: (Math.random() - 0.5) * 0.15,
+        opacity: Math.random() * 0.25 + 0.05,
       });
     }
 
@@ -51,24 +51,7 @@ export default function FloatingParticles() {
         ctx.fill();
       });
 
-      // Garis koneksi — hanya cek jarak dekat
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          // Skip jika terlalu jauh (optimasi)
-          if (Math.abs(dx) > 100 || Math.abs(dy) > 100) continue;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(108, 59, 255, ${0.04 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
+      // TANPA garis koneksi — ini yang bikin scroll berat
 
       animationId = requestAnimationFrame(animate);
     };

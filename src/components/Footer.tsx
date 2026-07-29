@@ -11,13 +11,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto section-padding py-16">
         <div className="flex flex-col items-center text-center">
           {/* Logo — diperbesar */}
-          <Image
-            src="/images/logo.png"
-            alt="POFSAIT"
-            width={88}
-            height={88}
-            className="mb-6 opacity-80"
-          />
+         <Image
+          src={`/images/logo.png?v=${Date.now()}`}
+          alt="POFSAIT"
+          width={88}
+          height={88}
+          className="mb-6 opacity-80"
+          unoptimized
+        />
 
           <h3 className="text-gradient font-display font-bold text-2xl mb-1">
             THE POFSAIT
