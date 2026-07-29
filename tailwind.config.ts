@@ -23,16 +23,14 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-sora)', 'system-ui', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'float-delayed': 'float 6s ease-in-out 2s infinite',
-        'float-slow': 'float 8s ease-in-out 1s infinite',
         'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
         'gradient-shift': 'gradientShift 8s ease infinite',
-        'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
         float: {

@@ -1,9 +1,9 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
 import MouseGlow from '@/components/MouseGlow';
-import FloatingParticles from '@/components/FloatingParticles';
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -12,8 +12,20 @@ import AboutSection from '@/sections/AboutSection';
 import MediaSection from '@/sections/MediaSection';
 import WalikelasSection from '@/sections/WalikelasSection';
 import AnggotaSection from '@/sections/AnggotaSection';
-import GallerySection from '@/sections/GallerySection';
-import PrestasiSection from '@/sections/PrestasiSection';
+
+// Dynamic imports untuk performa — tidak dimuat saat first paint
+const FloatingParticles = dynamic(
+  () => import('@/components/FloatingParticles'),
+  { ssr: false }
+);
+const GallerySection = dynamic(
+  () => import('@/sections/GallerySection'),
+  { ssr: false }
+);
+const PrestasiSection = dynamic(
+  () => import('@/sections/PrestasiSection'),
+  { ssr: false }
+);
 
 export default function Home() {
   return (

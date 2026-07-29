@@ -23,29 +23,26 @@ export default function LoadingScreen() {
         fadeOut ? 'fade-out-up' : ''
       }`}
     >
-      {/* Background glow */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
       </div>
 
-      {/* Logo */}
+      {/* Logo — diperbesar */}
       <div className="logo-reveal relative z-10">
         <Image
           src="/images/logo.png"
           alt="THE POFSAIT"
-          width={160}
-          height={160}
+          width={180}
+          height={180}
           priority
           className="drop-shadow-2xl"
         />
       </div>
 
-      {/* Loading bar */}
       <div className="mt-10 w-48 h-1 bg-white/10 rounded-full overflow-hidden relative z-10">
         <div className="h-full bg-gradient-animated rounded-full loading-bar" />
       </div>
 
-      {/* Text */}
       <p className="mt-5 text-primary-light/60 text-sm tracking-[0.3em] uppercase font-light relative z-10">
         Loading Memories
       </p>
