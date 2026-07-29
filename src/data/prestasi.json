@@ -1,0 +1,12 @@
+[
+  { "id": 1, "judul": "Juara 1 Lomba Cerdas Cermat", "deskripsi": "Meraih juara pertama dalam lomba cerdas cermat tingkat Kota dengan skor sempurna di babak final.", "foto": "https://picsum.photos/seed/prest1/800/500" },
+  { "id": 2, "judul": "Juara 2 Lomba Debat Bahasa Indonesia", "deskripsi": "Tim debat MIPA 2 berhasil menempatkan diri sebagai runner-up di tingkat Kabupaten.", "foto": "https://picsum.photos/seed/prest2/800/500" },
+  { "id": 3, "judul": "Juara 3 Olimpiade Matematika", "deskripsi": "Perwakilan kelas meraih medali perunggu di Olimpiade Matematika tingkat Provinsi.", "foto": "https://picsum.photos/seed/prest3/800/500" },
+  { "id": 4, "judul": "Juara 1 Lomba Paduan Suara", "deskripsi": "Paduan suara kelas tampil memukau dan meraih juara pertama di acara pentas seni sekolah.", "foto": "https://picsum.photos/seed/prest4/800/500" },
+  { "id": 5, "judul": "Juara 2 Lomba Puisi", "deskripsi": "Karya puisi dari anggota kelas mendapat penghargaan tingkat Kota dalam festival sastra.", "foto": "https://picsum.photos/seed/prest5/800/500" },
+  { "id": 6, "judul": "Juara 1 Futsal Antar Kelas", "deskripsi": "Tim futsal MIPA 2 tidak terkalahkan sepanjang turnamen dan menjadi kampiun.", "foto": "https://picsum.photos/seed/prest6/800/500" },
+  { "id": 7, "judul": "Juara 3 Lomba Sains Tingkat Provinsi", "deskripsi": "Tim sains berhasil membawa pulang penghargaan di ajang kompetisi sains Provinsi.", "foto": "https://picsum.photos/seed/prest7/800/500" },
+  { "id": 8, "judul": "Kelas Terbersih dan Tertib", "deskripsi": "MIPA 2 konsisten meraih predikat kelas terbersih selama 3 semester berturut-turut.", "foto": "https://picsum.photos/seed/prest8/800/500" },
+  { "id": 9, "judul": "Juara 2 Lomba Poster Digital", "deskripsi": "Kreativitas anggota kelas diakui melalui pencapaian di lomba poster digital tingkat Kota.", "foto": "https://picsum.photos/seed/prest9/800/500" },
+  { "id": 10, "judul": "Juara 1 Lomba Tari Tradisional", "deskripsi": "Penampilan tari tradisional kelas memukau juri dan penonton di acara tahunan sekolah.", "foto": "https://picsum.photos/seed/prest10/800/500" }
+]
