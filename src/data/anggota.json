@@ -1,5 +1,5 @@
 [
-  { "id": 1, "nama": "Ahmad Fauzan", "gender": "L", "foto": "https://picsum.photos/seed/pof1/400/400" },
+  { "id": 1, "nama": "Ahmad Fauzan", "gender": "L", "foto": "/member/Rijalul.jpg" },
   { "id": 2, "nama": "Bima Pratama", "gender": "L", "foto": "https://picsum.photos/seed/pof2/400/400" },
   { "id": 3, "nama": "Candra Wijaya", "gender": "L", "foto": "https://picsum.photos/seed/pof3/400/400" },
   { "id": 4, "nama": "Dimas Arya", "gender": "L", "foto": "https://picsum.photos/seed/pof4/400/400" },
