@@ -8,7 +8,7 @@ import Image from 'next/image';
 // GANTI FILE INI untuk mengganti background Hero
 // Taruh foto kelas di: /public/images/hero-bg.jpg
 // ============================================
-const HERO_BACKGROUND = '/images/hero-bg.jpg';
+const HERO_BACKGROUND = '/images/hero-bg.png';
 const HERO_FALLBACK = 'https://picsum.photos/seed/classphoto2024/1920/1080';
 
 export default function HeroSection() {

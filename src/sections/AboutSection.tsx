@@ -7,7 +7,7 @@ import { motion, useInView } from 'framer-motion';
 // GANTI file ini untuk mengganti background statistik
 // Taruh foto kelas di: /public/images/about-statistics.jpg
 // ============================================
-const ABOUT_STAT_BG = '/images/about-statistics.jpg';
+const ABOUT_STAT_BG = '/images/about-statistics.png';
 const ABOUT_STAT_FALLBACK = 'https://picsum.photos/seed/aboutstat/1920/800';
 
 function CounterAnimation({ target, inView }: { target: number; inView: boolean }) {

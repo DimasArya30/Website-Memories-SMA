@@ -7,22 +7,22 @@ import { ArrowUpRight } from 'lucide-react';
 
 // ============================================
 // GANTI file ini dengan foto profil asli:
-// /public/images/media/instagram-profile.jpg
-// /public/images/media/tiktok-profile.jpg
+// /public/images/media/instagram-profile.png
+// /public/images/media/tiktok-profile.png
 // ============================================
 const socials = [
   {
     name: 'Instagram',
     handle: '@the.pofsait',
     url: 'https://www.instagram.com/the.pofsait?igsh=MW53cmMyYnU5Z2E0MA%3D%3D&utm_source=qr',
-    localImg: '/images/media/instagram-profile.jpg',
+    localImg: '/images/instagram-profile.jpeg',
     fallbackImg: 'https://picsum.photos/seed/igprofile/800/600',
   },
   {
     name: 'TikTok',
     handle: '@the.pofsait',
     url: 'https://www.tiktok.com/@the.pofsait',
-    localImg: '/images/media/tiktok-profile.jpg',
+    localImg: '/images/tiktok-profile.png',
     fallbackImg: 'https://picsum.photos/seed/ttprofile/800/600',
   },
 ];
