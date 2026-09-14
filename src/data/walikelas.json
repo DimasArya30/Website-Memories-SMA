@@ -1,5 +1,5 @@
 [
   { "id": 1, "nama": "Ibu Pudji", "peran": "Wali Kelas X", "foto": "https://picsum.photos/seed/guru1/500/600" },
-  { "id": 2, "nama": "Pak Paedi", "peran": "Wali Kelas XI", "foto": "https://picsum.photos/seed/guru2/500/600" },
+  { "id": 2, "nama": "Pak Paedi", "peran": "Wali Kelas XI", "foto": "/member/Walas_Pak_Paedi.jpeg" },
   { "id": 3, "nama": "Pak Toni", "peran": "Wali Kelas XII", "foto": "https://picsum.photos/seed/guru3/500/600" }
 ]
